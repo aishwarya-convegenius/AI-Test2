@@ -1,46 +1,109 @@
-// Side flip: Side 1 (builder) <-> Side 2 (five moves). Purely visual,
-// in-memory state only — nothing is saved or sent anywhere.
+// Slide deck: 6 slides (4 on Side 1 · Build, 2 on Side 2 · Fix). The footer
+// Back / Next buttons move between slides; the side tabs reflect (and jump to)
+// the side the current slide belongs to. In-memory state only — nothing is
+// saved or sent anywhere.
 document.addEventListener('DOMContentLoaded', function () {
-  var sides = document.querySelectorAll('.side');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   var tabs = document.querySelectorAll('.side-tab');
+  var backBtn = document.getElementById('deck-back');
+  var nextBtn = document.getElementById('deck-next');
+  var nextLabel = nextBtn.querySelector('.btn-label');
+  var restartBtn = document.getElementById('deck-restart');
+  var dotsWrap = document.getElementById('deck-dots');
+  var count = document.getElementById('deck-count');
+  var total = slides.length;
+  var current = 0;
 
-  function showSide(n) {
-    sides.forEach(function (side) {
-      side.hidden = side.id !== 'side-' + n;
-    });
+  slides.forEach(function () {
+    dotsWrap.appendChild(document.createElement('span'));
+  });
+  var dots = dotsWrap.querySelectorAll('span');
+
+  function sideOf(i) { return slides[i].getAttribute('data-side'); }
+
+  function show(i) {
+    current = Math.max(0, Math.min(total - 1, i));
+    slides.forEach(function (slide, n) { slide.hidden = n !== current; });
+
+    var side = sideOf(current);
     tabs.forEach(function (tab) {
-      tab.classList.toggle('active', tab.getAttribute('data-tab') === String(n));
+      var on = tab.getAttribute('data-tab') === side;
+      tab.classList.toggle('active', on);
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
     });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    dots.forEach(function (dot, n) {
+      dot.classList.toggle('is-done', n < current);
+      dot.classList.toggle('is-current', n === current);
+    });
+    count.textContent = (current + 1) + ' / ' + total;
+
+    backBtn.classList.toggle('is-hidden', current === 0);
+    backBtn.disabled = current === 0;
+
+    var last = current === total - 1;
+    nextBtn.hidden = last;
+    restartBtn.hidden = !last;
+    // The last Build slide leads into the Fix side, so it keeps the card's
+    // original "See the 5 fixes" label.
+    var toFix = !last && sideOf(current) === '1' && sideOf(current + 1) === '2';
+    nextLabel.textContent = toFix ? 'See the 5 fixes' : 'Next';
   }
 
-  document.querySelectorAll('[data-side]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      showSide(btn.getAttribute('data-side'));
+  backBtn.addEventListener('click', function () { show(current - 1); });
+  nextBtn.addEventListener('click', function () { show(current + 1); });
+  restartBtn.addEventListener('click', function () { show(0); });
+
+  // Tabs jump to the first slide of that side.
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var side = tab.getAttribute('data-tab');
+      for (var n = 0; n < total; n++) {
+        if (sideOf(n) === side) { show(n); return; }
+      }
     });
   });
+
+  show(0);
 });
 
-// Request builder: 4 fields assemble into one live preview sentence.
+// Request builder: 4 fields assemble into one live preview sentence. The same
+// sentence is mirrored into the small previews on the field slides.
 document.addEventListener('DOMContentLoaded', function () {
   var role = document.getElementById('b-role');
   var context = document.getElementById('b-context');
   var task = document.getElementById('b-task');
   var format = document.getElementById('b-format');
   var preview = document.getElementById('prompt-preview');
+  var previews = document.querySelectorAll('.prompt-preview');
   var fields = [role, context, task, format];
 
+  function render(target) {
+    // Each filled value is wrapped in a span so it can be underlined
+    // (textContent — and therefore the copied text — is unchanged).
+    var parts = ['You are ', role, '. For ', context, ', ', task, '. Format it as ', format, '.'];
+    target.textContent = '';
+    parts.forEach(function (part) {
+      if (typeof part === 'string') {
+        target.appendChild(document.createTextNode(part));
+        return;
+      }
+      var value = part.value.trim();
+      var span = document.createElement('span');
+      span.className = value ? 'fill' : 'blank';
+      span.textContent = value || '___';
+      target.appendChild(span);
+    });
+  }
+
   function update() {
-    var r = role.value.trim() || '___';
-    var c = context.value.trim() || '___';
-    var t = task.value.trim() || '___';
-    var f = format.value.trim() || '___';
-    preview.textContent = 'You are ' + r + '. For ' + c + ', ' + t + '. Format it as ' + f + '.';
+    previews.forEach(render);
   }
 
   fields.forEach(function (field) {
     field.addEventListener('input', update);
   });
+  update();
 
   var examples = {
     workshop: {
@@ -86,6 +149,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var temp = document.createElement('textarea');
     temp.value = text;
     temp.style.position = 'fixed';
+    temp.style.top = '0';
+    temp.style.left = '0';
     temp.style.opacity = '0';
     document.body.appendChild(temp);
     temp.focus();

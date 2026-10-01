@@ -2,137 +2,210 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Request Builder and Refinement Card</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrap">
+<div class="app">
 
-  <header>
-    <div class="eyebrow">
-      <span class="mono schema">AAI-E-MC1-S02-CARD01</span>
-      <span class="badge">Prompt Card</span>
-      <span class="badge">0.5 hrs</span>
-      <span class="badge">Theory</span>
+  <div class="saa-header">
+    <div class="saa-brand">
+      <img src="assets/logo-mark.png" alt="">
+      <span>SWIFT&nbsp;AI&nbsp;ACADEMY</span>
     </div>
-    <h1>Request Builder and Refinement Card</h1>
-    <p class="subtitle">Build a clear request. Then fix it fast.</p>
-  </header>
-
-  <div class="side-tabs" aria-hidden="true">
-    <span class="side-tab active" data-tab="1">Side 1 &middot; Build</span>
-    <span class="side-tab" data-tab="2">Side 2 &middot; Fix</span>
-  </div>
-
-  <!-- SIDE 1 — request builder -->
-  <div id="side-1" class="side">
-
-    <section>
-      <h2>Build your request</h2>
-      <p>Fill in the 4 blanks below.</p>
-
-      <div class="chip-row">
-        <button type="button" class="chip-btn" data-example="workshop">Try: workshop example</button>
-        <button type="button" class="chip-btn" data-example="campus">Try: campus example</button>
-      </div>
-
-      <div class="builder">
-        <label for="b-role">Role <span class="opt">who should the AI act as?</span></label>
-        <input type="text" id="b-role" placeholder="e.g. a workshop teacher">
-
-        <label for="b-context">Context <span class="opt">why do you need this, and who is it for?</span></label>
-        <input type="text" id="b-context" placeholder="e.g. new trainees, before the practical">
-
-        <label for="b-task">Task <span class="opt">what should the AI make?</span></label>
-        <input type="text" id="b-task" placeholder="e.g. write a short safety reminder">
-
-        <label for="b-format">Format <span class="opt">how should it look?</span></label>
-        <input type="text" id="b-format" placeholder="e.g. 3 points for the noticeboard">
-      </div>
-
-      <p class="hint" style="margin:12px 0 6px;">Your request</p>
-      <div class="prompt-preview" id="prompt-preview">You are ___. For ___, ___. Format it as ___.</div>
-      <button type="button" class="btn-copy" id="copy-btn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-        Copy request
+    <div class="saa-header-actions">
+      <button type="button" class="saa-icon-btn" aria-label="Course outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
       </button>
-    </section>
-
-    <div class="side-nav">
-      <button type="button" class="btn-next" data-side="2">
-        See the 5 fixes
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      <button type="button" class="saa-ghost-pill" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        Close
       </button>
     </div>
-
   </div>
 
-  <!-- SIDE 2 — five refinement moves -->
-  <div id="side-2" class="side" hidden>
+  <main class="card saa-card">
 
-    <div class="side-nav side-nav-start">
-      <button type="button" class="btn-back" data-side="1">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        Back
-      </button>
-    </div>
-
-    <section>
-      <h2>Fix it fast</h2>
-      <p>The first answer is not always right. Try one of these 5 moves.</p>
-
-      <div class="move-grid">
-        <div class="move-card c1">
-          <span class="move-num">1</span>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="4 12 8 8"></polyline><polyline points="4 12 8 16"></polyline></svg>
-          <p class="move-name">Narrow</p>
-          <p class="move-fix">Answer covers too much.</p>
-          <span class="trigger">&ldquo;Only tell me about ___.&rdquo;</span>
-        </div>
-        <div class="move-card c4">
-          <span class="move-num">2</span>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          <p class="move-name">Expand</p>
-          <p class="move-fix">Answer is too short.</p>
-          <span class="trigger">&ldquo;Tell me more about ___.&rdquo;</span>
-        </div>
-        <div class="move-card c5">
-          <span class="move-num">3</span>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"></path><polyline points="21 3 21 9 15 9"></polyline></svg>
-          <p class="move-name">Change register</p>
-          <p class="move-fix">Tone or words are wrong.</p>
-          <span class="trigger">&ldquo;Say this simply for ___.&rdquo;</span>
-        </div>
-        <div class="move-card c3">
-          <span class="move-num">4</span>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2 2-2 3.5"></path><line x1="12" y1="16.5" x2="12.01" y2="16.5"></line></svg>
-          <p class="move-name">Check it</p>
-          <p class="move-fix">Answer sounds too sure.</p>
-          <span class="trigger">&ldquo;What might be wrong here?&rdquo;</span>
-        </div>
-        <div class="move-card c2 wide">
-          <span class="move-num">5</span>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <p class="move-name">Combine</p>
-          <p class="move-fix">You have two good answers.</p>
-          <span class="trigger">&ldquo;Combine the best of both.&rdquo;</span>
-        </div>
-      </div>
-    </section>
-
-    <div class="stop-rule">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A6B00" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-      <div>
-        <span class="label">Stop rule</span>
-        <p>If fixing it yourself is faster, just fix it. Always check before you use it.</p>
+    <!-- persistent strip: which side of the card the current slide belongs to -->
+    <div class="card-strip">
+      <div class="side-tabs" role="tablist" aria-label="Card side">
+        <button type="button" class="side-tab active" role="tab" aria-selected="true" data-tab="1">Side 1 &middot; Build</button>
+        <button type="button" class="side-tab" role="tab" aria-selected="false" data-tab="2">Side 2 &middot; Fix</button>
       </div>
     </div>
 
-  </div>
+    <div class="stage">
+
+      <!-- ============ SIDE 1 — request builder ============ -->
+
+      <!-- Slide 1 — intro -->
+      <section class="slide slide-intro" data-side="1" aria-label="Build your request">
+        <header>
+          <div class="saa-eyebrow">Prompt Card &middot; 0.5 hrs &middot; Theory</div>
+          <h1>Request Builder and Refinement Card</h1>
+          <p class="subtitle">Build a clear request. Then fix it fast.</p>
+          <span class="schema">AAI-E-MC1-S02-CARD01</span>
+        </header>
+        <hr class="saa-divider">
+        <div>
+          <h2>Build your request</h2>
+          <p class="build-lead">Fill in the 4 blanks below.</p>
+        </div>
+      </section>
+
+      <!-- Slide 2 — Role + Context -->
+      <section class="slide" data-side="1" hidden aria-label="Role and context">
+        <div class="slide-grid">
+          <div class="build-col">
+            <h2>Role and context</h2>
+            <div class="chip-row">
+              <button type="button" class="chip-btn" data-example="workshop">Try: workshop example</button>
+              <button type="button" class="chip-btn" data-example="campus">Try: campus example</button>
+            </div>
+            <div class="builder">
+              <div class="field">
+                <label for="b-role">Role <span class="opt">who should the AI act as?</span></label>
+                <input type="text" id="b-role" placeholder="e.g. a workshop teacher">
+              </div>
+              <div class="field">
+                <label for="b-context">Context <span class="opt">why do you need this, and who is it for?</span></label>
+                <input type="text" id="b-context" placeholder="e.g. new trainees, before the practical">
+              </div>
+            </div>
+          </div>
+          <div class="build-col preview-col">
+            <p class="hint preview-label">Your request</p>
+            <div class="prompt-preview mini" aria-hidden="true">You are ___. For ___, ___. Format it as ___.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3 — Task + Format -->
+      <section class="slide" data-side="1" hidden aria-label="Task and format">
+        <div class="slide-grid">
+          <div class="build-col">
+            <h2>Task and format</h2>
+            <div class="builder">
+              <div class="field">
+                <label for="b-task">Task <span class="opt">what should the AI make?</span></label>
+                <input type="text" id="b-task" placeholder="e.g. write a short safety reminder">
+              </div>
+              <div class="field">
+                <label for="b-format">Format <span class="opt">how should it look?</span></label>
+                <input type="text" id="b-format" placeholder="e.g. 3 points for the noticeboard">
+              </div>
+            </div>
+          </div>
+          <div class="build-col preview-col">
+            <p class="hint preview-label">Your request</p>
+            <div class="prompt-preview mini" aria-hidden="true">You are ___. For ___, ___. Format it as ___.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4 — assembled request + Copy -->
+      <section class="slide" data-side="1" hidden aria-label="Your request">
+        <div class="final-col">
+          <h2>Your request</h2>
+          <div class="prompt-preview" id="prompt-preview" aria-live="polite">You are ___. For ___, ___. Format it as ___.</div>
+          <div class="preview-actions">
+            <button type="button" class="btn-copy saa-btn-secondary" id="copy-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy request
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SIDE 2 — five refinement moves ============ -->
+
+      <!-- Slide 5 — moves 1–3 -->
+      <section class="slide" data-side="2" hidden aria-label="Fix it fast">
+        <div>
+          <h2>Fix it fast</h2>
+          <p class="build-lead">The first answer is not always right. Try one of these 5 moves.</p>
+          <div class="move-grid">
+            <div class="move-card c1">
+              <span class="move-num">1</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="4 12 8 8"></polyline><polyline points="4 12 8 16"></polyline></svg>
+              <p class="move-name">Narrow</p>
+              <p class="move-fix">Answer covers too much.</p>
+              <span class="trigger">&ldquo;Only tell me about ___.&rdquo;</span>
+            </div>
+            <div class="move-card c4">
+              <span class="move-num">2</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <p class="move-name">Expand</p>
+              <p class="move-fix">Answer is too short.</p>
+              <span class="trigger">&ldquo;Tell me more about ___.&rdquo;</span>
+            </div>
+            <div class="move-card c5">
+              <span class="move-num">3</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"></path><polyline points="21 3 21 9 15 9"></polyline></svg>
+              <p class="move-name">Change register</p>
+              <p class="move-fix">Tone or words are wrong.</p>
+              <span class="trigger">&ldquo;Say this simply for ___.&rdquo;</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6 — moves 4–5 + stop rule -->
+      <section class="slide" data-side="2" hidden aria-label="Check, combine, stop">
+        <div>
+          <h2>Check, combine, stop</h2>
+          <div class="move-grid">
+            <div class="move-card c3">
+              <span class="move-num">4</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2 2-2 3.5"></path><line x1="12" y1="16.5" x2="12.01" y2="16.5"></line></svg>
+              <p class="move-name">Check it</p>
+              <p class="move-fix">Answer sounds too sure.</p>
+              <span class="trigger">&ldquo;What might be wrong here?&rdquo;</span>
+            </div>
+            <div class="move-card c2">
+              <span class="move-num">5</span>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <p class="move-name">Combine</p>
+              <p class="move-fix">You have two good answers.</p>
+              <span class="trigger">&ldquo;Combine the best of both.&rdquo;</span>
+            </div>
+          </div>
+          <div class="stop-rule">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            <div>
+              <span class="label">Stop rule</span>
+              <p>If fixing it yourself is faster, just fix it. Always check before you use it.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- footer: progress + Back / Next -->
+  <footer class="deck-foot">
+    <button type="button" class="btn-back saa-btn-secondary" id="deck-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back
+    </button>
+    <div class="deck-progress">
+      <div class="deck-dots" id="deck-dots" aria-hidden="true"></div>
+      <span class="deck-count" id="deck-count" aria-live="polite">1 / 6</span>
+    </div>
+    <button type="button" class="btn-next saa-btn-primary" id="deck-next">
+      <span class="btn-label">Next</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </button>
+    <button type="button" class="btn-restart saa-btn-secondary" id="deck-restart" hidden>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"></path><polyline points="21 3 21 9 15 9"></polyline></svg>
+      Back to Build
+    </button>
+  </footer>
 
 </div>
 <script src="script.js"></script>
