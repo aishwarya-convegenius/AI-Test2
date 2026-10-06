@@ -348,3 +348,86 @@ h2{font-size:20px;font-weight:700;color:var(--ivory);margin:0 0 6px}
   .builder label{margin-bottom:6px}
   .deck-foot{padding:8px 0 10px}
 }
+
+/* ESL upgrade (game-specific) */
+/* saa-kit.css styles reveal cards as .saa-card; the game's main card shares that class, so restore its frame. */
+main.card.saa-card{
+  position:static;min-height:0;perspective:none;transform:none;
+  background:var(--glass);border:1px solid var(--line);border-radius:var(--radius-card);box-shadow:none;
+  padding:22px 32px 26px;
+}
+main.card.saa-card:hover{transform:none;border-color:var(--line)}
+/* the current slide carries .active (script.js); hide the others even if [hidden] is lost */
+.stage > .slide:not(.active){display:none}
+.slide .saa-eyebrow{margin:0}
+.slide .builder{gap:12px}
+.slide .chip-row{margin-bottom:0}
+.slide .preview-col{display:flex;flex-direction:column;gap:8px}
+.stop-note{margin:0;padding:12px 16px;border-radius:12px;background:var(--amber-tint);border:1px solid rgba(243,171,49,0.24);color:var(--ivory);font-size:14px;line-height:1.5}
+.stop-note b{color:var(--amber)}
+@media (max-width:640px){ main.card.saa-card{padding:18px 16px 20px} }
+@media (max-height:700px) and (max-width:640px){ main.card.saa-card{padding:14px 16px 16px} }
+/* field hints were class .opt, which the shared layer styles as a quiz option; renamed to .opt-hint */
+.builder label .opt-hint{font-size:12px;font-weight:400;color:#8C95B8}
+.builder label .opt-hint::before{content:'\2014\00a0'}
+.final-col{max-width:none}
+
+/* Game 6 designer assets (Oct 2026) */
+.g6-ico{width:20px;height:20px;flex:none;display:inline-block;vertical-align:-4px;margin-right:6px}
+.chip-btn{display:inline-flex;align-items:center}
+.chip-btn .g6-ico{width:18px;height:18px;margin-right:7px}
+.builder label .g6-ico{width:18px;height:18px;vertical-align:-4px}
+figure.g6-template,figure.g6-shapes,figure.g6-paste{margin:0}
+/* screen 1: live four-part template (pack components/request-template, dark) */
+.g6-template{margin-top:calc(14px / var(--z,1));padding:16px 18px;border-radius:14px;background:rgba(91,118,255,0.06);border:1px solid rgba(91,118,255,0.22)}
+.g6-template-line{font-size:16px;line-height:2.4;color:var(--ivory)}
+.g6-pill{display:inline-flex;align-items:center;gap:6px;vertical-align:middle;padding:0 11px;line-height:32px;border-radius:999px;font-size:14px;font-weight:600;white-space:nowrap;background:#172552;border:1px solid #2E3B78;color:var(--ivory)}
+.g6-pill:nth-of-type(2){background:#1B2C61}
+.g6-pill:nth-of-type(3){background:#20346E}
+.g6-pill:nth-of-type(4){background:#263F7B}
+.g6-pill .g6-ico{width:18px;height:18px;margin:0;vertical-align:middle}
+.g6-example-label{margin:10px 0 4px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.g6-example{font-size:14.5px;line-height:1.55;color:var(--text)}
+/* screen 3: answer shapes picture */
+.g6-shapes img{display:block;width:min(100%,300px);height:auto;border-radius:10px}
+/* screen 4: paste guide picture */
+.g6-paste{position:relative;width:min(100%,520px)}
+.g6-paste img{display:block;width:100%;height:auto;border-radius:12px}
+.g6-paste-copy{position:absolute;left:2%;top:35%;width:22.5%;height:21%;padding:0;border:0;background:transparent;border-radius:10px;cursor:pointer}
+/* screens 5-6: move icons on the reveal card fronts */
+.saa-kit .saa-front{padding-right:58px}
+.saa-kit .saa-front .g6-move{position:absolute;right:16px;top:50%;width:32px;height:32px;transform:translateY(-50%)}
+/* screen 6: stop rule icon */
+.stop-note .g6-stop{width:20px;height:20px;vertical-align:-4px;margin-right:8px}
+@media (max-height:640px){
+  .g6-template{padding:10px 14px}
+  .g6-template-line{line-height:2.1}
+  .g6-shapes img{width:min(100%,240px)}
+  .g6-paste{width:min(100%,420px)}
+}
+@media (max-width:640px){
+  .g6-template{padding:12px}
+  .g6-template-line{font-size:14px}
+  .g6-pill{font-size:13px;line-height:28px;padding:0 9px}
+  .g6-shapes img{width:min(100%,240px)}
+  .g6-paste{width:min(100%,250px)}
+}
+
+/* QA fixes (Oct 2026) */
+/* Build gates: the message shows when Next is pressed too early */
+.ga-gate{display:block;margin:0;min-height:0;color:#FFB3B3;font-size:15px;font-weight:600;line-height:1.45}
+.ga-gate:empty{position:absolute;width:1px;height:1px;margin:0;padding:0;overflow:hidden;pointer-events:none}
+.ga-gate.ga-shake,.g6-copy-msg.ga-shake{animation:saaShake .35s} /* not .saa-shake: a nudge, not a wrong answer (no wrong sound) */
+.g6-copy-msg{margin:8px 0 0;color:#FFB3B3;font-size:15px;font-weight:600;line-height:1.45}
+.g6-copy-msg:empty{display:none}
+.g6-done{margin:12px 0 0;color:#7FE5B8;font-size:16px;font-weight:600;line-height:1.45}
+.g6-done[hidden]{display:none}
+input:focus-visible,input:focus{outline:2px solid #FFC168;outline-offset:2px}
+@media (max-width:640px){
+  .side-tab{min-height:44px}
+  .chip-btn{min-height:44px}
+  /* screen 4: on phones show only the tools part of the paste guide, as wide as the card, so its words can be read */
+  .g6-paste{width:100%;aspect-ratio:2.55;overflow:hidden;border-radius:12px}
+  .g6-paste img{width:149.5%;max-width:none;margin:-1.9% 0 0 -46.7%;border-radius:0}
+  .g6-paste-copy{display:none}
+}
